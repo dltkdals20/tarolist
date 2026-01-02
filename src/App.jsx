@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Sparkles, RefreshCw, Moon, Loader, Calendar, Layers, Brain, Star } from 'lucide-react';
+import { Sparkles, RefreshCw, Moon, Loader, Calendar, Layers, Brain, Star, Share2, Copy, Check } from 'lucide-react';
+import { saveReading, getReading } from './lib/supabase';
 
 // --- 유틸리티: 로마 숫자 변환 ---
 const toRoman = (num) => {
@@ -196,6 +197,9 @@ export default function TarotApp() {
   const [selectedCards, setSelectedCards] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]); 
   const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [shareUrl, setShareUrl] = useState('');
+  const [isSharing, setIsSharing] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     const preloadImages = async () => {
@@ -294,6 +298,57 @@ export default function TarotApp() {
     setGameState('intro');
     setSelectedCards([]);
     setFlippedCards([]);
+    setShareUrl('');
+  };
+
+  const handleShare = async () => {
+    if (isSharing) return;
+    
+    setIsSharing(true);
+    try {
+      // 고유 ID 생성 (간단한 랜덤 문자열)
+      const shareId = Math.random().toString(36).substring(2, 10);
+      
+      // 결과 데이터 준비
+      const readingData = {
+        share_id: shareId,
+        reading_type: readingType,
+        selected_cards: selectedCards.map(card => ({
+          id: card.id,
+          name: card.name,
+          nameKo: card.nameKo,
+          keywords: card.keywords,
+          desc: card.desc,
+          image: card.image,
+          type: card.type,
+          number: card.number
+        }))
+      };
+      
+      // Supabase에 저장
+      await saveReading(readingData);
+      
+      // 공유 URL 생성
+      const url = `${window.location.origin}/share/${shareId}`;
+      setShareUrl(url);
+      
+    } catch (error) {
+      console.error('공유 실패:', error);
+      alert('공유 링크 생성에 실패했습니다. 다시 시도해주세요.');
+    } finally {
+      setIsSharing(false);
+    }
+  };
+
+  const copyShareUrl = async () => {
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (error) {
+      console.error('복사 실패:', error);
+      alert('링크 복사에 실패했습니다.');
+    }
   };
 
   const selectableDeck = gameState === 'selecting' 
@@ -701,13 +756,42 @@ export default function TarotApp() {
               ))}
             </div>
 
-            <button 
-              onClick={resetGame}
-              className={`mt-8 md:mt-20 px-6 md:px-12 py-3 md:py-4 text-sm md:text-base border ${isInnerActive ? 'border-cyan-900/50 active:border-cyan-500 md:hover:border-cyan-500 text-cyan-600 active:text-cyan-100 md:hover:text-cyan-100' : 'border-amber-900/50 active:border-amber-500 md:hover:border-amber-500 text-amber-600 active:text-amber-100 md:hover:text-amber-100'} font-serif tracking-[0.2em] transition-all flex items-center gap-2 md:gap-3 mx-auto bg-black/50 backdrop-blur-md ${flippedCards.every(Boolean) ? 'opacity-100' : 'opacity-50'} touch-manipulation`}
-            >
-              <RefreshCw size={12} className="md:w-3.5 md:h-3.5" />
-              <span className="whitespace-nowrap">CONSULT AGAIN</span>
-            </button>
+            {/* 공유 및 다시하기 버튼 */}
+            <div className="mt-8 md:mt-20 flex flex-col md:flex-row gap-4 items-center justify-center">
+              {/* 공유하기 버튼 */}
+              {!shareUrl ? (
+                <button 
+                  onClick={handleShare}
+                  disabled={isSharing || !flippedCards.every(Boolean)}
+                  className={`px-6 md:px-10 py-3 md:py-4 text-sm md:text-base border ${isInnerActive ? 'border-cyan-900/50 active:border-cyan-500 md:hover:border-cyan-500 text-cyan-600 active:text-cyan-100 md:hover:text-cyan-100' : 'border-amber-900/50 active:border-amber-500 md:hover:border-amber-500 text-amber-600 active:text-amber-100 md:hover:text-amber-100'} font-serif tracking-[0.2em] transition-all flex items-center gap-2 md:gap-3 bg-black/50 backdrop-blur-md ${!flippedCards.every(Boolean) || isSharing ? 'opacity-50 cursor-not-allowed' : 'opacity-100'} touch-manipulation`}
+                >
+                  <Share2 size={14} className="md:w-4 md:h-4" />
+                  <span className="whitespace-nowrap">{isSharing ? '생성 중...' : '공유하기'}</span>
+                </button>
+              ) : (
+                <div className="flex flex-col md:flex-row gap-3 items-center">
+                  <div className={`px-4 py-2 text-xs md:text-sm ${isInnerActive ? 'bg-cyan-950/50 border-cyan-500/30 text-cyan-300' : 'bg-amber-950/50 border-amber-500/30 text-amber-300'} border rounded font-mono max-w-xs md:max-w-md overflow-hidden text-ellipsis whitespace-nowrap`}>
+                    {shareUrl}
+                  </div>
+                  <button 
+                    onClick={copyShareUrl}
+                    className={`px-4 py-2 text-sm border ${isInnerActive ? 'border-cyan-500/50 text-cyan-400 active:bg-cyan-500/10' : 'border-amber-500/50 text-amber-400 active:bg-amber-500/10'} rounded flex items-center gap-2 transition-all touch-manipulation`}
+                  >
+                    {copied ? <Check size={16} /> : <Copy size={16} />}
+                    <span>{copied ? '복사됨!' : '복사'}</span>
+                  </button>
+                </div>
+              )}
+              
+              {/* 다시하기 버튼 */}
+              <button 
+                onClick={resetGame}
+                className={`px-6 md:px-12 py-3 md:py-4 text-sm md:text-base border ${isInnerActive ? 'border-cyan-900/50 active:border-cyan-500 md:hover:border-cyan-500 text-cyan-600 active:text-cyan-100 md:hover:text-cyan-100' : 'border-amber-900/50 active:border-amber-500 md:hover:border-amber-500 text-amber-600 active:text-amber-100 md:hover:text-amber-100'} font-serif tracking-[0.2em] transition-all flex items-center gap-2 md:gap-3 bg-black/50 backdrop-blur-md ${flippedCards.every(Boolean) ? 'opacity-100' : 'opacity-50'} touch-manipulation`}
+              >
+                <RefreshCw size={12} className="md:w-3.5 md:h-3.5" />
+                <span className="whitespace-nowrap">CONSULT AGAIN</span>
+              </button>
+            </div>
           </div>
         )}
 
