@@ -599,69 +599,32 @@ export default function TarotApp() {
                )}
             </div>
             
-            {/* The Fan Container - 모든 화면: 그리드 2줄 */}
+            {/* The Fan Container - 모든 화면: 그리드 연속 표시 */}
             <div className="flex-1 w-full relative flex items-start justify-center overflow-y-auto overflow-x-hidden">
-               {/* 그리드 레이아웃 (2줄로 나누기) */}
+               {/* 그리드 레이아웃 (연속 표시) */}
                <div className="w-full px-2 md:px-4 py-4">
-                  {(() => {
-                     const midPoint = Math.ceil(selectableDeck.length / 2);
-                     const firstRow = selectableDeck.slice(0, midPoint);
-                     const secondRow = selectableDeck.slice(midPoint);
-                     
-                     return (
-                        <div className="space-y-3 md:space-y-4">
-                           {/* 첫 번째 줄 */}
-                           <div className="grid grid-cols-6 md:grid-cols-10 lg:grid-cols-12 gap-1.5 md:gap-2 max-w-full mx-auto">
-                              {firstRow.map((card) => (
-                                <button
-                                  key={card.id}
-                                  onClick={() => selectCard(card)}
-                                  className={`w-full aspect-[2/3] bg-[#0c0a09] border ${isInnerActive ? 'border-cyan-800' : 'border-[#78350f]'} rounded shadow-lg cursor-pointer overflow-hidden transition-all duration-200 group active:scale-95 md:hover:scale-105 relative touch-manipulation`}
-                                >
-                                   <div className="absolute inset-0 transition-transform duration-200">
-                                      {/* Back Design */}
-                                      <div className="w-full h-full bg-[#1c1917]" style={{
-                                          backgroundImage: `radial-gradient(${isInnerActive ? '#155e75' : '#78350f'} 1px, transparent 1px)`,
-                                          backgroundSize: '6px 6px'
-                                      }}></div>
-                                      <div className={`absolute inset-0.5 border ${isInnerActive ? 'border-cyan-900/50' : 'border-amber-900/50'}`}></div>
-                                      <div className="absolute inset-0 flex items-center justify-center">
-                                         <Moon size={10} className={`md:w-4 md:h-4 ${isInnerActive ? 'text-cyan-700/50' : 'text-amber-700/50'}`} />
-                                      </div>
-                                      <div className={`absolute inset-0 bg-transparent ${isInnerActive ? 'group-active:bg-cyan-500/10 md:group-hover:bg-cyan-500/10' : 'group-active:bg-amber-500/10 md:group-hover:bg-amber-500/10'} transition-colors`}></div>
-                                   </div>
-                                </button>
-                              ))}
-                           </div>
-                           
-                           {/* 두 번째 줄 */}
-                           {secondRow.length > 0 && (
-                              <div className="grid grid-cols-6 md:grid-cols-10 lg:grid-cols-12 gap-1.5 md:gap-2 max-w-full mx-auto">
-                                 {secondRow.map((card) => (
-                                   <button
-                                     key={card.id}
-                                     onClick={() => selectCard(card)}
-                                     className={`w-full aspect-[2/3] bg-[#0c0a09] border ${isInnerActive ? 'border-cyan-800' : 'border-[#78350f]'} rounded shadow-lg cursor-pointer overflow-hidden transition-all duration-200 group active:scale-95 md:hover:scale-105 relative touch-manipulation`}
-                                   >
-                                      <div className="absolute inset-0 transition-transform duration-200">
-                                         {/* Back Design */}
-                                         <div className="w-full h-full bg-[#1c1917]" style={{
-                                             backgroundImage: `radial-gradient(${isInnerActive ? '#155e75' : '#78350f'} 1px, transparent 1px)`,
-                                             backgroundSize: '6px 6px'
-                                         }}></div>
-                                         <div className={`absolute inset-0.5 border ${isInnerActive ? 'border-cyan-900/50' : 'border-amber-900/50'}`}></div>
-                                         <div className="absolute inset-0 flex items-center justify-center">
-                                            <Moon size={10} className={`md:w-4 md:h-4 ${isInnerActive ? 'text-cyan-700/50' : 'text-amber-700/50'}`} />
-                                         </div>
-                                         <div className={`absolute inset-0 bg-transparent ${isInnerActive ? 'group-active:bg-cyan-500/10 md:group-hover:bg-cyan-500/10' : 'group-active:bg-amber-500/10 md:group-hover:bg-amber-500/10'} transition-colors`}></div>
-                                      </div>
-                                   </button>
-                                 ))}
-                              </div>
-                           )}
-                        </div>
-                     );
-                  })()}
+                  <div className="grid grid-cols-6 md:grid-cols-10 lg:grid-cols-12 gap-1.5 md:gap-2 max-w-full mx-auto">
+                     {selectableDeck.map((card) => (
+                       <button
+                         key={card.id}
+                         onClick={() => selectCard(card)}
+                         className={`w-full aspect-[2/3] bg-[#0c0a09] border ${isInnerActive ? 'border-cyan-800' : 'border-[#78350f]'} rounded shadow-lg cursor-pointer overflow-hidden transition-all duration-200 group active:scale-95 md:hover:scale-105 relative touch-manipulation`}
+                       >
+                          <div className="absolute inset-0 transition-transform duration-200">
+                             {/* Back Design */}
+                             <div className="w-full h-full bg-[#1c1917]" style={{
+                                 backgroundImage: `radial-gradient(${isInnerActive ? '#155e75' : '#78350f'} 1px, transparent 1px)`,
+                                 backgroundSize: '6px 6px'
+                             }}></div>
+                             <div className={`absolute inset-0.5 border ${isInnerActive ? 'border-cyan-900/50' : 'border-amber-900/50'}`}></div>
+                             <div className="absolute inset-0 flex items-center justify-center">
+                                <Moon size={10} className={`md:w-4 md:h-4 ${isInnerActive ? 'text-cyan-700/50' : 'text-amber-700/50'}`} />
+                             </div>
+                             <div className={`absolute inset-0 bg-transparent ${isInnerActive ? 'group-active:bg-cyan-500/10 md:group-hover:bg-cyan-500/10' : 'group-active:bg-amber-500/10 md:group-hover:bg-amber-500/10'} transition-colors`}></div>
+                          </div>
+                       </button>
+                     ))}
+                  </div>
                </div>
             </div>
             
