@@ -264,14 +264,14 @@ export default function TarotApp() {
   // 슬라이드 네비게이션 함수
   const nextSlide = () => {
     if (readingType === 'inneractive' && deck.length > 0) {
-      const maxSlides = Math.ceil(deck.length / 3);
+      const maxSlides = deck.length; // 1개씩 표시하므로 deck.length
       setSlideIndex((prev) => (prev + 1) % maxSlides);
     }
   };
 
   const prevSlide = () => {
     if (readingType === 'inneractive' && deck.length > 0) {
-      const maxSlides = Math.ceil(deck.length / 3);
+      const maxSlides = deck.length; // 1개씩 표시하므로 deck.length
       setSlideIndex((prev) => (prev - 1 + maxSlides) % maxSlides);
     }
   };
@@ -604,67 +604,63 @@ export default function TarotApp() {
             {/* Card Container */}
             <div className="flex-1 w-full relative flex items-start justify-center overflow-hidden">
                {readingType === 'inneractive' ? (
-                  /* 이너액티브: 3장씩 슬라이드 */
-                  <div className="w-full h-full flex flex-col items-center justify-center px-4 py-8">
+                  /* 이너액티브: 1장씩 슬라이드 - 최대 크기 */
+                  <div className="w-full h-full flex flex-col items-center justify-center px-2 py-2">
                      <div 
-                        className="relative w-full max-w-4xl"
+                        className="relative w-full h-full max-h-[80vh]"
                         onTouchStart={handleTouchStart}
                         onTouchEnd={handleTouchEnd}
                      >
                         {/* 슬라이드 컨테이너 */}
-                        <div className="flex items-center justify-center gap-3 md:gap-6 min-h-[400px] md:min-h-[500px]">
-                           {deck.slice(slideIndex * 3, slideIndex * 3 + 3).map((card) => (
+                        <div className="flex items-center justify-center w-full h-full relative">
+                           {deck.length > 0 && (
                               <button
-                                 key={card.id}
-                                 onClick={() => selectCard(card)}
-                                 disabled={selectedCards.find(c => c.id === card.id)}
-                                 className={`w-[28%] md:w-[30%] max-w-[200px] aspect-[2/3] rounded-lg overflow-hidden shadow-2xl transition-all duration-300 ${
-                                    selectedCards.find(c => c.id === card.id) 
-                                       ? 'opacity-30 scale-90 cursor-not-allowed' 
+                                 key={deck[slideIndex].id}
+                                 onClick={() => selectCard(deck[slideIndex])}
+                                 disabled={selectedCards.find(c => c.id === deck[slideIndex].id)}
+                                 className={`w-full h-full max-w-lg max-h-[70vh] aspect-[2/3] rounded-xl overflow-hidden shadow-2xl transition-all duration-300 ${
+                                    selectedCards.find(c => c.id === deck[slideIndex].id) 
+                                       ? 'opacity-40 scale-90 cursor-not-allowed' 
                                        : 'active:scale-95 md:hover:scale-105 cursor-pointer'
-                                 } touch-manipulation`}
+                                 } touch-manipulation border-4 ${isInnerActive ? 'border-cyan-600' : 'border-amber-600'}`}
                               >
                                  <img 
-                                    src={card.image} 
-                                    alt={`카드 ${card.id}`}
-                                    className="w-full h-full object-cover"
+                                    src={deck[slideIndex].image} 
+                                    alt={`카드 ${slideIndex + 1}`}
+                                    className="w-full h-full object-contain bg-black"
                                  />
                               </button>
-                           ))}
+                           )}
                         </div>
 
                         {/* 좌우 네비게이션 버튼 */}
                         <button
                            onClick={prevSlide}
-                           className={`absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-black/50 border ${isInnerActive ? 'border-cyan-500/50' : 'border-amber-500/50'} rounded-full flex items-center justify-center ${isInnerActive ? 'text-cyan-400 active:bg-cyan-900/50' : 'text-amber-400 active:bg-amber-900/50'} transition-all touch-manipulation backdrop-blur-sm`}
+                           className={`absolute left-2 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 bg-black/60 border-2 ${isInnerActive ? 'border-cyan-500' : 'border-amber-500'} rounded-full flex items-center justify-center ${isInnerActive ? 'text-cyan-400 active:bg-cyan-900/70' : 'text-amber-400 active:bg-amber-900/70'} transition-all touch-manipulation backdrop-blur-md text-2xl md:text-3xl font-bold`}
                         >
                            ‹
                         </button>
                         <button
                            onClick={nextSlide}
-                           className={`absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-black/50 border ${isInnerActive ? 'border-cyan-500/50' : 'border-amber-500/50'} rounded-full flex items-center justify-center ${isInnerActive ? 'text-cyan-400 active:bg-cyan-900/50' : 'text-amber-400 active:bg-amber-900/50'} transition-all touch-manipulation backdrop-blur-sm`}
+                           className={`absolute right-2 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 bg-black/60 border-2 ${isInnerActive ? 'border-cyan-500' : 'border-amber-500'} rounded-full flex items-center justify-center ${isInnerActive ? 'text-cyan-400 active:bg-cyan-900/70' : 'text-amber-400 active:bg-amber-900/70'} transition-all touch-manipulation backdrop-blur-md text-2xl md:text-3xl font-bold`}
                         >
                            ›
                         </button>
 
                         {/* 슬라이드 인디케이터 */}
-                        <div className="flex justify-center gap-2 mt-6">
-                           {[...Array(Math.ceil(deck.length / 3))].map((_, idx) => (
+                        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex justify-center gap-1">
+                           {[...Array(deck.length)].map((_, idx) => (
                               <div 
                                  key={idx}
-                                 className={`w-2 h-2 rounded-full transition-all ${
+                                 className={`h-2 rounded-full transition-all ${
                                     idx === slideIndex 
-                                       ? (isInnerActive ? 'bg-cyan-400 w-6' : 'bg-amber-400 w-6')
-                                       : (isInnerActive ? 'bg-cyan-900/50' : 'bg-amber-900/50')
+                                       ? (isInnerActive ? 'bg-cyan-400 w-3' : 'bg-amber-400 w-3')
+                                       : (isInnerActive ? 'bg-cyan-900/60 w-1.5' : 'bg-amber-900/60 w-1.5')
                                  }`}
                               />
                            ))}
                         </div>
                      </div>
-                     
-                     <p className={`text-xs ${isInnerActive ? 'text-cyan-800' : 'text-amber-900'} animate-pulse mt-4 font-serif tracking-[0.2em]`}>
-                        스와이프하거나 화살표를 눌러 다른 카드를 탐색하세요
-                     </p>
                   </div>
                ) : (
                   /* 다른 모드: 그리드 레이아웃 */
@@ -713,17 +709,17 @@ export default function TarotApp() {
             </h2>
             
             {readingType === 'inneractive' ? (
-              /* 이너액티브: 이미지만 세로로 표시 */
-              <div className="w-full max-w-md px-4 space-y-4 md:space-y-6">
+              /* 이너액티브: 이미지 최대 크기로 표시 */
+              <div className="w-full max-w-lg px-2 space-y-3 md:space-y-4">
                 {selectedCards.map((card, idx) => (
                   <div key={card.id} className="w-full animate-fade-in" style={{ animationDelay: `${idx * 0.1}s` }}>
-                    <div className="relative w-full aspect-[2/3] rounded-lg overflow-hidden shadow-2xl border-2 border-cyan-500/30">
+                    <div className="relative w-full aspect-[2/3] rounded-xl overflow-hidden shadow-2xl border-4 border-cyan-600/70">
                       <img 
                         src={card.image} 
                         alt={`선택한 카드 ${idx + 1}`}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain bg-black"
                       />
-                      <div className="absolute bottom-2 right-2 bg-black/70 text-cyan-300 text-xs px-2 py-1 rounded font-serif">
+                      <div className="absolute bottom-3 right-3 bg-black/80 text-cyan-300 text-xs px-2 py-1 rounded font-serif font-bold">
                         #{idx + 1}
                       </div>
                     </div>
