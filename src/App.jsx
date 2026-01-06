@@ -96,71 +96,35 @@ const createTarotDeck = () => {
   return [...majorArcana, ...minorArcana];
 };
 
-// --- 2. 이너액티브(심리) 전용 데이터 (명화 대체) ---
-// 사용자님이 찍은 사진 주소가 있다면 image: "주소" 부분을 수정하세요.
+// --- 2. 이너액티브(심리) 전용 데이터 (76개 실제 촬영 카드) ---
 const createInnerActiveDeck = () => {
-  return [
-    { 
-      id: 'ia_critic', 
-      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Daumier_-_The_Judges.jpg/400px-Daumier_-_The_Judges.jpg", 
-      name: "The Critic", nameKo: "내면의 비판자", keywords: "심판, 엄격함, 감시", 
-      desc: "당신을 감시하고 비판하는 내면의 목소리입니다. 실수를 막으려 하지만, 때로는 당신을 위축되게 만듭니다." 
-    },
-    { 
-      id: 'ia_child', 
-      image: "https://upload.wikimedia.org/wikipedia/commons/6/68/Bouguereau-Broken_Pitcher.jpg", 
-      name: "Inner Child", nameKo: "상처받은 내면아이", keywords: "순수, 결핍, 슬픔", 
-      desc: "과거의 상처나 채워지지 않은 욕구를 안고 있는 여린 아이입니다. 따뜻한 관심과 위로를 기다리고 있습니다." 
-    },
-    { 
-      id: 'ia_mask', 
-      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Un_masque.jpg/400px-Un_masque.jpg", 
-      name: "The Persona", nameKo: "페르소나 (가면)", keywords: "사회적 자아, 방어, 연기", 
-      desc: "세상에 보여주기 위해 쓰고 있는 가면입니다. 타인에게 맞춰진 모습이지만, 진정한 자신을 숨기고 있을 수 있습니다." 
-    },
-    { 
-      id: 'ia_shadow', 
-      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Fuseli_The_Nightmare.jpg/400px-Fuseli_The_Nightmare.jpg", 
-      name: "The Shadow", nameKo: "그림자", keywords: "무의식, 두려움, 억압", 
-      desc: "인정하고 싶지 않은 나의 어두운 일면입니다. 하지만 이 그림자 속에는 엄청난 창조적 에너지가 잠자고 있습니다." 
-    },
-    { 
-      id: 'ia_self', 
-      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Monet_-_Impression%2C_Sunrise.jpg/400px-Monet_-_Impression%2C_Sunrise.jpg", 
-      name: "The Self", nameKo: "참나 (Self)", keywords: "치유, 평온, 중심", 
-      desc: "모든 부분들을 포용하고 치유할 수 있는 당신의 본질적인 자아입니다. 고요하고 지혜로운 내면의 태양입니다." 
-    },
-    { 
-      id: 'ia_anxiety', 
-      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/The_Scream.jpg/400px-The_Scream.jpg", 
-      name: "The Anxious", nameKo: "불안해하는 자", keywords: "공포, 혼란, 경고", 
-      desc: "미래에 대한 두려움으로 가득 찬 부분입니다. 위험을 미리 감지하려 하지만, 현재의 평화를 깨트리기도 합니다." 
-    },
-    { 
-      id: 'ia_loner', 
-      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Caspar_David_Friedrich_-_Der_Wanderer_%C3%BCber_dem_Nebelmeer.jpg/400px-Caspar_David_Friedrich_-_Der_Wanderer_%C3%BCber_dem_Nebelmeer.jpg", 
-      name: "The Loner", nameKo: "고독한 방랑자", keywords: "고립, 성찰, 거리두기", 
-      desc: "사람들 속에서 벗어나 혼자만의 세계로 들어가려는 성향입니다. 깊은 사색을 주지만 소외감을 느낄 수도 있습니다." 
-    },
-    { 
-      id: 'ia_dreamer', 
-      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/400px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg", 
-      name: "The Dreamer", nameKo: "몽상가", keywords: "이상, 상상, 도피", 
-      desc: "현실의 고단함을 잊기 위해 환상의 세계를 여행하는 예술가적 자아입니다. 아름다운 꿈을 꿉니다." 
-    },
-    { 
-      id: 'ia_warrior', 
-      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Napoleon_crossing_the_Alps_Malmaison2.jpg/400px-Napoleon_crossing_the_Alps_Malmaison2.jpg", 
-      name: "The Achiever", nameKo: "성취가", keywords: "목표, 야망, 돌진", 
-      desc: "성공과 인정을 위해 쉴 새 없이 달리는 에너지입니다. 당신을 앞으로 나아가게 합니다." 
-    },
-    { 
-      id: 'ia_nurturer', 
-      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Cassatt_Mary_Child_in_a_Straw_Hat.jpg/400px-Cassatt_Mary_Child_in_a_Straw_Hat.jpg", 
-      name: "The Nurturer", nameKo: "양육자", keywords: "돌봄, 희생, 사랑", 
-      desc: "타인을 돌보고 배려하는 어머니 같은 마음입니다. 정작 자신을 소홀히 하고 있지는 않은지 돌아보세요." 
-    }
+  const imageFiles = [
+    '20260106_083813.jpg', '20260106_083929.jpg', '20260106_084045.jpg', '20260106_084118.jpg',
+    '20260106_084150.jpg', '20260106_084235.jpg', '20260106_084315.jpg', '20260106_084352.jpg',
+    '20260106_084440.jpg', '20260106_084511.jpg', '20260106_084549.jpg', '20260106_084630.jpg',
+    '20260106_084701.jpg', '20260106_084735.jpg', '20260106_084833.jpg', '20260106_084910.jpg',
+    '20260106_084939.jpg', '20260106_085012.jpg', '20260106_085044.jpg', '20260106_085114.jpg',
+    '20260106_085149.jpg', '20260106_085217.jpg', '20260106_085248.jpg', '20260106_085318.jpg',
+    '20260106_085357.jpg', '20260106_085428.jpg', '20260106_085455.jpg', '20260106_085525.jpg',
+    '20260106_085614.jpg', '20260106_085639.jpg', '20260106_085709.jpg', '20260106_085744.jpg',
+    '20260106_085819.jpg', '20260106_085834.jpg', '20260106_085843.jpg', '20260106_085855.jpg',
+    '20260106_085907.jpg', '20260106_085918.jpg', '20260106_085934.jpg', '20260106_085946.jpg',
+    '20260106_085957.jpg', '20260106_090018.jpg', '20260106_090028.jpg', '20260106_090047.jpg',
+    '20260106_090059.jpg', '20260106_090109.jpg', '20260106_090124.jpg', '20260106_090139.jpg',
+    '20260106_090150.jpg', '20260106_090202.jpg', '20260106_090212.jpg', '20260106_090224.jpg',
+    '20260106_090234.jpg', '20260106_090244.jpg', '20260106_090258.jpg', '20260106_090311.jpg',
+    '20260106_090328.jpg', '20260106_090343.jpg', '20260106_090400.jpg', '20260106_090412.jpg',
+    '20260106_090423.jpg', '20260106_090437.jpg', '20260106_090450.jpg', '20260106_090505.jpg',
+    '20260106_090515.jpg', '20260106_090529.jpg', '20260106_090539.jpg', '20260106_090548.jpg',
+    '20260106_090608.jpg', '20260106_090616.jpg', '20260106_090629.jpg', '20260106_090640.jpg',
+    '20260106_090652.jpg', '20260106_090703.jpg', '20260106_090718.jpg', '20260106_090729.jpg'
   ];
+  
+  return imageFiles.map((filename, index) => ({
+    id: `ia_${String(index + 1).padStart(2, '0')}`,
+    image: `/타로/${filename}`,
+    type: 'inneractive'
+  }));
 };
 
 const TAROT_DATA = createTarotDeck();
@@ -200,6 +164,8 @@ export default function TarotApp() {
   const [shareUrl, setShareUrl] = useState('');
   const [isSharing, setIsSharing] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [slideIndex, setSlideIndex] = useState(0); // 슬라이드 현재 인덱스
+  const [touchStart, setTouchStart] = useState(0); // 터치 시작 위치
 
   useEffect(() => {
     const preloadImages = async () => {
@@ -233,10 +199,11 @@ export default function TarotApp() {
       setDeck(shuffleDeck(currentDeck));
       setGameState('selecting');
       setSelectedCards([]);
+      setSlideIndex(0); // 슬라이드 인덱스 초기화
       
       let count = 4;
       if (type === 'newyear') count = 13;
-      if (type === 'inneractive') count = 5;
+      if (type === 'inneractive') count = 0; // 이너액티브 무제한
       if (type === 'custom') count = 0; // 커스텀은 무제한
       
       setFlippedCards(new Array(count).fill(false));
@@ -245,7 +212,7 @@ export default function TarotApp() {
 
   const getTargetCount = () => {
     if (readingType === 'newyear') return 13;
-    if (readingType === 'inneractive') return 5;
+    if (readingType === 'inneractive') return Infinity; // 이너액티브 무제한
     if (readingType === 'custom') return Infinity; // 커스텀은 무제한
     return 4; // general
   };
@@ -253,12 +220,12 @@ export default function TarotApp() {
   const selectCard = (card) => {
     const maxCards = getTargetCount();
     
-    // 커스텀 모드는 무제한이므로 항상 추가 가능
-    if (readingType === 'custom') {
+    // 커스텀/이너액티브 모드는 무제한이므로 항상 추가 가능
+    if (readingType === 'custom' || readingType === 'inneractive') {
       if (selectedCards.find(c => c.id === card.id)) return;
       const newSelection = [...selectedCards, card];
       setSelectedCards(newSelection);
-      // 커스텀 모드는 자동으로 넘어가지 않음
+      // 자동으로 넘어가지 않음
       return;
     }
     
@@ -294,11 +261,46 @@ export default function TarotApp() {
     setFlippedCards(newFlipped);
   };
 
+  // 슬라이드 네비게이션 함수
+  const nextSlide = () => {
+    if (readingType === 'inneractive' && deck.length > 0) {
+      const maxSlides = Math.ceil(deck.length / 3);
+      setSlideIndex((prev) => (prev + 1) % maxSlides);
+    }
+  };
+
+  const prevSlide = () => {
+    if (readingType === 'inneractive' && deck.length > 0) {
+      const maxSlides = Math.ceil(deck.length / 3);
+      setSlideIndex((prev) => (prev - 1 + maxSlides) % maxSlides);
+    }
+  };
+
+  // 터치/스와이프 핸들러
+  const handleTouchStart = (e) => {
+    setTouchStart(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e) => {
+    const touchEnd = e.changedTouches[0].clientX;
+    const diff = touchStart - touchEnd;
+    
+    // 50px 이상 스와이프한 경우
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) {
+        nextSlide(); // 왼쪽으로 스와이프 -> 다음
+      } else {
+        prevSlide(); // 오른쪽으로 스와이프 -> 이전
+      }
+    }
+  };
+
   const resetGame = () => {
     setGameState('intro');
     setSelectedCards([]);
     setFlippedCards([]);
     setShareUrl('');
+    setSlideIndex(0);
   };
 
   const handleShare = async () => {
@@ -374,7 +376,7 @@ export default function TarotApp() {
        if (selectedCards.length === 2) return "미래를 상징하는 세 번째 카드를 뽑아주세요.";
        return "마지막으로, 당신을 위한 조언 카드를 뽑아주세요.";
     } else if (readingType === 'inneractive') {
-        return `${selectedCards.length + 1}번째 내면 카드를 선택해주세요. (${selectedCards.length + 1}/5)`;
+        return `당신의 내면을 반영하는 카드를 선택하세요 (현재 ${selectedCards.length}장 선택됨)`;
     } else if (readingType === 'custom') {
         return `원하는 만큼 카드를 선택하세요. (현재 ${selectedCards.length}장 선택됨)`;
     } else {
@@ -437,7 +439,7 @@ export default function TarotApp() {
                 <div className="w-full h-full relative">
                    {!imagesLoaded ? (
                      <div className="flex flex-col items-center gap-4 justify-center h-full">
-                        <Loader className="animate-spin text-amber-500" size={24} className="md:w-8 md:h-8" />
+                        <Loader className="animate-spin text-amber-500 w-6 h-6 md:w-8 md:h-8" />
                      </div>
                    ) : (
                       <>
@@ -541,7 +543,7 @@ export default function TarotApp() {
           </div>
         )}
 
-        {/* Selecting (Pure Fan Layout) */}
+        {/* Selecting */}
         {gameState === 'selecting' && (
           <div className="w-full text-center animate-fade-in flex flex-col h-full pb-4 md:pb-8">
             <h2 className={`text-sm md:text-lg ${themeText} shrink-0 h-8 md:h-10 font-serif tracking-wider px-2`}>
@@ -551,8 +553,8 @@ export default function TarotApp() {
             {/* Selected Slots Preview */}
             <div className="flex flex-col items-center gap-3 shrink-0 z-20 relative mb-2">
                <div className="flex justify-center gap-1.5 md:gap-2 px-2 md:px-4 h-[70px] md:h-[130px] items-center overflow-x-auto custom-scrollbar w-full">
-                  {readingType === 'custom' ? (
-                     // 커스텀 모드: 선택된 카드만 표시 (클릭 시 제거)
+                  {(readingType === 'custom' || readingType === 'inneractive') ? (
+                     // 커스텀/이너액티브 모드: 선택된 카드만 표시 (클릭 시 제거)
                      selectedCards.length > 0 ? (
                         selectedCards.map((card, idx) => (
                           <button
@@ -587,8 +589,8 @@ export default function TarotApp() {
                   )}
                </div>
                
-               {/* 커스텀 모드: 카드 보기 버튼 */}
-               {readingType === 'custom' && selectedCards.length > 0 && (
+               {/* 카드 보기 버튼 */}
+               {(readingType === 'custom' || readingType === 'inneractive') && selectedCards.length > 0 && (
                   <button
                      onClick={viewSelectedCards}
                      className={`px-6 md:px-10 py-2.5 md:py-3 text-sm md:text-base bg-slate-900 border ${isInnerActive ? 'border-cyan-500/50 active:border-cyan-400 md:hover:border-cyan-400 text-cyan-400 active:text-cyan-100 md:hover:text-cyan-100' : 'border-amber-500/50 active:border-amber-400 md:hover:border-amber-400 text-amber-400 active:text-amber-100 md:hover:text-amber-100'} rounded-sm font-serif tracking-widest transition-all transform active:-translate-y-0.5 md:hover:-translate-y-1 touch-manipulation flex items-center gap-2`}
@@ -599,38 +601,107 @@ export default function TarotApp() {
                )}
             </div>
             
-            {/* The Fan Container - 모든 화면: 그리드 연속 표시 */}
-            <div className="flex-1 w-full relative flex items-start justify-center overflow-y-auto overflow-x-hidden">
-               {/* 그리드 레이아웃 (연속 표시) */}
-               <div className="w-full px-2 md:px-4 py-4">
-                  <div className="grid grid-cols-6 md:grid-cols-10 lg:grid-cols-12 gap-1.5 md:gap-2 max-w-full mx-auto">
-                     {selectableDeck.map((card) => (
-                       <button
-                         key={card.id}
-                         onClick={() => selectCard(card)}
-                         className={`w-full aspect-[2/3] bg-[#0c0a09] border ${isInnerActive ? 'border-cyan-800' : 'border-[#78350f]'} rounded shadow-lg cursor-pointer overflow-hidden transition-all duration-200 group active:scale-95 md:hover:scale-105 relative touch-manipulation`}
-                       >
-                          <div className="absolute inset-0 transition-transform duration-200">
-                             {/* Back Design */}
-                             <div className="w-full h-full bg-[#1c1917]" style={{
-                                 backgroundImage: `radial-gradient(${isInnerActive ? '#155e75' : '#78350f'} 1px, transparent 1px)`,
-                                 backgroundSize: '6px 6px'
-                             }}></div>
-                             <div className={`absolute inset-0.5 border ${isInnerActive ? 'border-cyan-900/50' : 'border-amber-900/50'}`}></div>
-                             <div className="absolute inset-0 flex items-center justify-center">
-                                <Moon size={10} className={`md:w-4 md:h-4 ${isInnerActive ? 'text-cyan-700/50' : 'text-amber-700/50'}`} />
-                             </div>
-                             <div className={`absolute inset-0 bg-transparent ${isInnerActive ? 'group-active:bg-cyan-500/10 md:group-hover:bg-cyan-500/10' : 'group-active:bg-amber-500/10 md:group-hover:bg-amber-500/10'} transition-colors`}></div>
-                          </div>
-                       </button>
-                     ))}
+            {/* Card Container */}
+            <div className="flex-1 w-full relative flex items-start justify-center overflow-hidden">
+               {readingType === 'inneractive' ? (
+                  /* 이너액티브: 3장씩 슬라이드 */
+                  <div className="w-full h-full flex flex-col items-center justify-center px-4 py-8">
+                     <div 
+                        className="relative w-full max-w-4xl"
+                        onTouchStart={handleTouchStart}
+                        onTouchEnd={handleTouchEnd}
+                     >
+                        {/* 슬라이드 컨테이너 */}
+                        <div className="flex items-center justify-center gap-3 md:gap-6 min-h-[400px] md:min-h-[500px]">
+                           {deck.slice(slideIndex * 3, slideIndex * 3 + 3).map((card) => (
+                              <button
+                                 key={card.id}
+                                 onClick={() => selectCard(card)}
+                                 disabled={selectedCards.find(c => c.id === card.id)}
+                                 className={`w-[28%] md:w-[30%] max-w-[200px] aspect-[2/3] rounded-lg overflow-hidden shadow-2xl transition-all duration-300 ${
+                                    selectedCards.find(c => c.id === card.id) 
+                                       ? 'opacity-30 scale-90 cursor-not-allowed' 
+                                       : 'active:scale-95 md:hover:scale-105 cursor-pointer'
+                                 } touch-manipulation`}
+                              >
+                                 <img 
+                                    src={card.image} 
+                                    alt={`카드 ${card.id}`}
+                                    className="w-full h-full object-cover"
+                                 />
+                              </button>
+                           ))}
+                        </div>
+
+                        {/* 좌우 네비게이션 버튼 */}
+                        <button
+                           onClick={prevSlide}
+                           className={`absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-black/50 border ${isInnerActive ? 'border-cyan-500/50' : 'border-amber-500/50'} rounded-full flex items-center justify-center ${isInnerActive ? 'text-cyan-400 active:bg-cyan-900/50' : 'text-amber-400 active:bg-amber-900/50'} transition-all touch-manipulation backdrop-blur-sm`}
+                        >
+                           ‹
+                        </button>
+                        <button
+                           onClick={nextSlide}
+                           className={`absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-black/50 border ${isInnerActive ? 'border-cyan-500/50' : 'border-amber-500/50'} rounded-full flex items-center justify-center ${isInnerActive ? 'text-cyan-400 active:bg-cyan-900/50' : 'text-amber-400 active:bg-amber-900/50'} transition-all touch-manipulation backdrop-blur-sm`}
+                        >
+                           ›
+                        </button>
+
+                        {/* 슬라이드 인디케이터 */}
+                        <div className="flex justify-center gap-2 mt-6">
+                           {[...Array(Math.ceil(deck.length / 3))].map((_, idx) => (
+                              <div 
+                                 key={idx}
+                                 className={`w-2 h-2 rounded-full transition-all ${
+                                    idx === slideIndex 
+                                       ? (isInnerActive ? 'bg-cyan-400 w-6' : 'bg-amber-400 w-6')
+                                       : (isInnerActive ? 'bg-cyan-900/50' : 'bg-amber-900/50')
+                                 }`}
+                              />
+                           ))}
+                        </div>
+                     </div>
+                     
+                     <p className={`text-xs ${isInnerActive ? 'text-cyan-800' : 'text-amber-900'} animate-pulse mt-4 font-serif tracking-[0.2em]`}>
+                        스와이프하거나 화살표를 눌러 다른 카드를 탐색하세요
+                     </p>
                   </div>
-               </div>
+               ) : (
+                  /* 다른 모드: 그리드 레이아웃 */
+                  <div className="flex-1 w-full relative flex items-start justify-center overflow-y-auto overflow-x-hidden">
+                     <div className="w-full px-2 md:px-4 py-4">
+                        <div className="grid grid-cols-6 md:grid-cols-10 lg:grid-cols-12 gap-1.5 md:gap-2 max-w-full mx-auto">
+                           {selectableDeck.map((card) => (
+                             <button
+                               key={card.id}
+                               onClick={() => selectCard(card)}
+                               className={`w-full aspect-[2/3] bg-[#0c0a09] border ${isInnerActive ? 'border-cyan-800' : 'border-[#78350f]'} rounded shadow-lg cursor-pointer overflow-hidden transition-all duration-200 group active:scale-95 md:hover:scale-105 relative touch-manipulation`}
+                             >
+                                <div className="absolute inset-0 transition-transform duration-200">
+                                   {/* Back Design */}
+                                   <div className="w-full h-full bg-[#1c1917]" style={{
+                                       backgroundImage: `radial-gradient(${isInnerActive ? '#155e75' : '#78350f'} 1px, transparent 1px)`,
+                                       backgroundSize: '6px 6px'
+                                   }}></div>
+                                   <div className={`absolute inset-0.5 border ${isInnerActive ? 'border-cyan-900/50' : 'border-amber-900/50'}`}></div>
+                                   <div className="absolute inset-0 flex items-center justify-center">
+                                      <Moon size={10} className={`md:w-4 md:h-4 ${isInnerActive ? 'text-cyan-700/50' : 'text-amber-700/50'}`} />
+                                   </div>
+                                   <div className={`absolute inset-0 bg-transparent ${isInnerActive ? 'group-active:bg-cyan-500/10 md:group-hover:bg-cyan-500/10' : 'group-active:bg-amber-500/10 md:group-hover:bg-amber-500/10'} transition-colors`}></div>
+                                </div>
+                             </button>
+                           ))}
+                        </div>
+                     </div>
+                  </div>
+               )}
             </div>
             
-            <p className={`text-xs ${isInnerActive ? 'text-cyan-800' : 'text-amber-900'} animate-pulse mt-2 font-serif tracking-[0.2em]`}>
-              {readingType === 'custom' ? '원하는 만큼 카드를 선택하세요' : 'PICK A CARD'}
-            </p>
+            {readingType !== 'inneractive' && (
+               <p className={`text-xs ${isInnerActive ? 'text-cyan-800' : 'text-amber-900'} animate-pulse mt-2 font-serif tracking-[0.2em]`}>
+                 {readingType === 'custom' ? '원하는 만큼 카드를 선택하세요' : 'PICK A CARD'}
+               </p>
+            )}
           </div>
         )}
 
@@ -641,83 +712,104 @@ export default function TarotApp() {
                 {renderTitle()}
             </h2>
             
-            <div className={`grid gap-4 md:gap-x-8 md:gap-y-16 w-full px-3 md:px-6 ${
-              readingType === 'newyear' 
-                ? 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4' 
-                : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5'
-            }`}>
-              {selectedCards.map((card, idx) => (
-                <div key={card.id} className="flex flex-col items-center group mb-4 md:mb-0">
-                  {/* Label */}
-                  <div className={`text-[10px] md:text-xs lg:text-sm font-serif font-bold mb-2 md:mb-4 tracking-widest uppercase text-center h-5 md:h-6 flex items-end ${themeAccent} px-2`}>
-                    {getLabel(idx)}
-                  </div>
-
-                  {/* Card Container */}
-                  <div 
-                    className="relative w-32 h-52 sm:w-40 sm:h-64 md:w-44 md:h-72 lg:w-52 lg:h-80 cursor-pointer perspective-1000 touch-manipulation active:scale-95 md:active:scale-100"
-                    onClick={() => handleReveal(idx)}
-                  >
-                    <div className={`relative w-full h-full transition-all duration-1000 transform-style-3d ${flippedCards[idx] ? 'rotate-y-180' : ''}`}>
-                      
-                      {/* Back Side */}
-                      <div className={`absolute w-full h-full backface-hidden bg-[#0c0a09] border ${isInnerActive ? 'border-cyan-800' : 'border-[#78350f]'} rounded shadow-2xl flex items-center justify-center`}>
-                         <div className={`absolute inset-1 md:inset-2 border ${isInnerActive ? 'border-cyan-900/30' : 'border-amber-900/30'}`}></div>
-                         <div className="w-full h-full opacity-30" style={{
-                             backgroundImage: `radial-gradient(${isInnerActive ? '#0891b2' : '#78350f'} 1px, transparent 1px)`,
-                             backgroundSize: '8px 8px'
-                         }}></div>
-                         <Sparkles className={`${isInnerActive ? 'text-cyan-800/50' : 'text-amber-800/50'} animate-pulse`} size={24} className="md:w-8 md:h-8" />
-                      </div>
-
-                      {/* Front Side */}
-                      <div className={`absolute w-full h-full backface-hidden rotate-y-180 bg-[#1c1917] border-[2px] md:border-[4px] rounded shadow-2xl overflow-hidden flex flex-col ${
-                          (readingType === 'general' && idx === 3) || (readingType === 'newyear' && idx === 12) || (readingType === 'inneractive' && idx === 4)
-                          ? (isInnerActive ? 'border-cyan-400' : 'border-amber-400') 
-                          : (isInnerActive ? 'border-cyan-900' : 'border-[#451a03]')
-                      }`}>
-                         
-                         <div className="flex-1 relative overflow-hidden bg-black">
-                            <img 
-                              src={card.image} 
-                              alt={card.name} 
-                              className={`w-full h-full object-cover contrast-125 brightness-90 transition-transform duration-[2s] md:group-hover:scale-110 ${isInnerActive ? 'sepia-[0.2]' : 'sepia-[0.4]'}`}
-                            />
-                            <div className="absolute inset-0 bg-[#000000] mix-blend-overlay opacity-30 pointer-events-none"></div>
-                         </div>
-
-                         <div className={`h-10 md:h-14 bg-[#0f0a05] flex flex-col items-center justify-center border-t-2 ${isInnerActive ? 'border-cyan-900' : 'border-[#451a03]'} shrink-0 px-1 md:px-2 text-center relative`}>
-                            {card.type === 'major' && (
-                                <span className={`text-[7px] md:text-[9px] font-serif tracking-widest absolute top-0.5 md:top-1 ${isInnerActive ? 'text-cyan-700' : 'text-amber-700'}`}>{toRoman(card.number)}</span>
-                            )}
-                            <span className={`font-serif text-[10px] sm:text-xs md:text-sm lg:text-base tracking-wider break-keep leading-tight mt-0.5 md:mt-1 ${
-                                (readingType === 'general' && idx === 3) || (readingType === 'newyear' && idx === 12) || (readingType === 'inneractive' && idx === 4)
-                                ? (isInnerActive ? 'text-cyan-300 font-bold' : 'text-amber-300 font-bold')
-                                : 'text-[#d6d3d1]'
-                            }`}>
-                                {card.nameKo}
-                            </span>
-                         </div>
+            {readingType === 'inneractive' ? (
+              /* 이너액티브: 이미지만 세로로 표시 */
+              <div className="w-full max-w-md px-4 space-y-4 md:space-y-6">
+                {selectedCards.map((card, idx) => (
+                  <div key={card.id} className="w-full animate-fade-in" style={{ animationDelay: `${idx * 0.1}s` }}>
+                    <div className="relative w-full aspect-[2/3] rounded-lg overflow-hidden shadow-2xl border-2 border-cyan-500/30">
+                      <img 
+                        src={card.image} 
+                        alt={`선택한 카드 ${idx + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute bottom-2 right-2 bg-black/70 text-cyan-300 text-xs px-2 py-1 rounded font-serif">
+                        #{idx + 1}
                       </div>
                     </div>
                   </div>
+                ))}
+              </div>
+            ) : (
+              /* 다른 모드: 기존 그리드 레이아웃 */
+              <div className={`grid gap-4 md:gap-x-8 md:gap-y-16 w-full px-3 md:px-6 ${
+                readingType === 'newyear' 
+                  ? 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4' 
+                  : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5'
+              }`}>
+                {selectedCards.map((card, idx) => (
+                  <div key={card.id} className="flex flex-col items-center group mb-4 md:mb-0">
+                    {/* Label */}
+                    <div className={`text-[10px] md:text-xs lg:text-sm font-serif font-bold mb-2 md:mb-4 tracking-widest uppercase text-center h-5 md:h-6 flex items-end ${themeAccent} px-2`}>
+                      {getLabel(idx)}
+                    </div>
 
-                  {/* Description Box */}
-                  <div className={`mt-4 md:mt-8 text-center transition-all duration-1000 px-2 w-full max-w-full md:max-w-xs transform ${flippedCards[idx] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 md:translate-y-8 pointer-events-none'}`}>
-                     <h3 className={`text-sm md:text-lg font-serif font-bold mb-1 ${themeText}`}>{card.name}</h3>
-                     <p className={`text-[9px] md:text-[10px] lg:text-xs mb-2 md:mb-4 tracking-wider ${isInnerActive ? 'text-cyan-500/60' : 'text-amber-500/60'}`}>{card.keywords}</p>
-                     <div className={`text-[11px] md:text-xs lg:text-sm leading-relaxed word-keep-all p-3 md:p-4 border relative bg-[#0a0a0a] ${
-                         (readingType === 'general' && idx === 3) || (readingType === 'newyear' && idx === 12) || (readingType === 'inneractive' && idx === 4)
-                         ? (isInnerActive ? 'border-cyan-500/40 text-cyan-50' : 'border-amber-500/40 text-amber-50')
-                         : (isInnerActive ? 'border-cyan-900/20 text-slate-400' : 'border-amber-900/20 text-stone-400')
-                     }`}>
-                       {card.desc}
-                     </div>
+                    {/* Card Container */}
+                    <div 
+                      className="relative w-32 h-52 sm:w-40 sm:h-64 md:w-44 md:h-72 lg:w-52 lg:h-80 cursor-pointer perspective-1000 touch-manipulation active:scale-95 md:active:scale-100"
+                      onClick={() => handleReveal(idx)}
+                    >
+                      <div className={`relative w-full h-full transition-all duration-1000 transform-style-3d ${flippedCards[idx] ? 'rotate-y-180' : ''}`}>
+                        
+                        {/* Back Side */}
+                        <div className={`absolute w-full h-full backface-hidden bg-[#0c0a09] border ${isInnerActive ? 'border-cyan-800' : 'border-[#78350f]'} rounded shadow-2xl flex items-center justify-center`}>
+                           <div className={`absolute inset-1 md:inset-2 border ${isInnerActive ? 'border-cyan-900/30' : 'border-amber-900/30'}`}></div>
+                           <div className="w-full h-full opacity-30" style={{
+                               backgroundImage: `radial-gradient(${isInnerActive ? '#0891b2' : '#78350f'} 1px, transparent 1px)`,
+                               backgroundSize: '8px 8px'
+                           }}></div>
+                           <Sparkles className={`${isInnerActive ? 'text-cyan-800/50' : 'text-amber-800/50'} animate-pulse w-6 h-6 md:w-8 md:h-8`} />
+                        </div>
+
+                        {/* Front Side */}
+                        <div className={`absolute w-full h-full backface-hidden rotate-y-180 bg-[#1c1917] border-[2px] md:border-[4px] rounded shadow-2xl overflow-hidden flex flex-col ${
+                            (readingType === 'general' && idx === 3) || (readingType === 'newyear' && idx === 12)
+                            ? 'border-amber-400'
+                            : 'border-[#451a03]'
+                        }`}>
+                           
+                           <div className="flex-1 relative overflow-hidden bg-black">
+                              <img 
+                                src={card.image} 
+                                alt={card.name} 
+                                className={`w-full h-full object-cover contrast-125 brightness-90 transition-transform duration-[2s] md:group-hover:scale-110 sepia-[0.4]`}
+                              />
+                              <div className="absolute inset-0 bg-[#000000] mix-blend-overlay opacity-30 pointer-events-none"></div>
+                           </div>
+
+                           <div className={`h-10 md:h-14 bg-[#0f0a05] flex flex-col items-center justify-center border-t-2 border-[#451a03] shrink-0 px-1 md:px-2 text-center relative`}>
+                              {card.type === 'major' && (
+                                  <span className={`text-[7px] md:text-[9px] font-serif tracking-widest absolute top-0.5 md:top-1 text-amber-700`}>{toRoman(card.number)}</span>
+                              )}
+                              <span className={`font-serif text-[10px] sm:text-xs md:text-sm lg:text-base tracking-wider break-keep leading-tight mt-0.5 md:mt-1 ${
+                                  (readingType === 'general' && idx === 3) || (readingType === 'newyear' && idx === 12)
+                                  ? 'text-amber-300 font-bold'
+                                  : 'text-[#d6d3d1]'
+                              }`}>
+                                  {card.nameKo}
+                              </span>
+                           </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Description Box */}
+                    <div className={`mt-4 md:mt-8 text-center transition-all duration-1000 px-2 w-full max-w-full md:max-w-xs transform ${flippedCards[idx] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 md:translate-y-8 pointer-events-none'}`}>
+                       <h3 className={`text-sm md:text-lg font-serif font-bold mb-1 ${themeText}`}>{card.name}</h3>
+                       <p className={`text-[9px] md:text-[10px] lg:text-xs mb-2 md:mb-4 tracking-wider text-amber-500/60`}>{card.keywords}</p>
+                       <div className={`text-[11px] md:text-xs lg:text-sm leading-relaxed word-keep-all p-3 md:p-4 border relative bg-[#0a0a0a] ${
+                           (readingType === 'general' && idx === 3) || (readingType === 'newyear' && idx === 12)
+                           ? 'border-amber-500/40 text-amber-50'
+                           : 'border-amber-900/20 text-stone-400'
+                       }`}>
+                         {card.desc}
+                       </div>
+                    </div>
+
                   </div>
-
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
 
             {/* 공유 및 다시하기 버튼 */}
             <div className="mt-8 md:mt-20 flex flex-col md:flex-row gap-4 items-center justify-center">
